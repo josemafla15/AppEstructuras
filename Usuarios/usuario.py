@@ -9,3 +9,6 @@ class Usuario:
 
     def registrarse():
         pass
+
+    def loguearse():
+        pass

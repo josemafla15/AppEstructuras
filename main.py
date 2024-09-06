@@ -9,11 +9,17 @@ ventana.resizable(0,0)
 ventana.config(bd=15)
 
 # DEFINICION DE VARIABLES 
+
+# VARIABLES REGISTRO
 valor_nombre_registro = StringVar()
 valor_apellidos_registro = StringVar()
 valor_correo_registro = StringVar()
 valor_contraseña_registro = StringVar()
 valor_codigo_registro = StringVar()
+
+# VARIABLES LOGIN
+valor_correo_login = StringVar()
+valor_contraseña_login = StringVar()
 
 # DEFINICION DE METODOS 
 
@@ -75,14 +81,14 @@ def loginFrame():
 
     Label(frame_login, text="").grid(row=2)
     Label(frame_login, text="Correo: ").grid(row=3, column=0, sticky=NW)
-    correo_entry = Entry(frame_login).grid(row=3, column=1, sticky=NW)
+    correo_entry = Entry(frame_login, textvariable=valor_correo_login).grid(row=3, column=1, sticky=NW)
 
     Label(frame_login, text="").grid(row=4)
     Label(frame_login, text="Contraseña: ").grid(row=5, column=0, sticky=NW)
-    contraseña_entry = Entry(frame_login).grid(row=5, column=1, sticky=NW)
+    contraseña_entry = Entry(frame_login, textvariable=valor_contraseña_login).grid(row=5, column=1, sticky=NW)
 
     Label(frame_login, text="").grid(row=6)
-    boton_iniciar_sesion = Button(frame_login, text="Iniciar sesión")
+    boton_iniciar_sesion = Button(frame_login, text="Iniciar sesión", command=login)
     boton_iniciar_sesion.config(bg="green",
                                 fg="white"
                                 )
@@ -97,6 +103,10 @@ def registro():
     if registro[0] >= 1:
         print("Registro exitoso")
     else: print("Lo sentimos, contraseña invalida")
+
+def login():
+    usuario = User.Usuario("", "", valor_correo_login.get(), valor_contraseña_login.get())
+    login = usuario.loguearse()
 
 # DEFINICION DE FRAMES
 
