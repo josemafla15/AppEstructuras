@@ -6,3 +6,6 @@ class Usuario:
         self.apellidos = apellidos
         self.correo = correo
         self.password = password
+
+    def registrarse():
+        pass
