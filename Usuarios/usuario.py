@@ -37,5 +37,6 @@ class Usuario:
 
         cursor.execute(sql, usuario)
         resultado = cursor.fetchone()
+        
 
         return resultado
