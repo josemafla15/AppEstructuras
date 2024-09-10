@@ -33,6 +33,9 @@ valor_tipo_anadir = IntVar()
 
 valor_cantidad_anadir = IntVar()
 
+# VARIABLES VER
+tipos = ["1kg papas", "1lt aceite", "1 paquete salchichas"]
+
 # VARIABLES ELIMINAR TODo
 
 valor_id_eliminar = IntVar()
@@ -164,7 +167,7 @@ def login():
         datos_usuario.append(login[5])
 
 
-        print(datos_usuario)
+        
         accionesFrame()
         frame_login.grid_remove()
 
@@ -276,7 +279,7 @@ def anadirFrame():
     Label(frame_anadir, text="Selecciona el tipo").grid(row=5, column=0, sticky=NW)
 
     entry_tipo = Entry(frame_anadir, textvariable=valor_tipo_anadir).grid(row=5, column=1, sticky=NW)
-    llamada()
+    
 
     Label(frame_anadir, text="").grid(row=6)
     Label(frame_anadir, text="Cantidad: ").grid(row=7, column=0, sticky=NW)
@@ -324,10 +327,15 @@ def verFrame():
     def volver():
         accionesFrame()
         frame_ver.grid_remove()
-        #frame_ver
+    
+    
+    
     frame_acciones.grid_remove()
     frame_ver.config(bd=4, relief="solid")
     frame_ver.grid(row=0)
+
+    frame_mostrar.config(bd=4, relief="solid")
+    frame_mostrar.grid(row=2)
 
     titulo = Label(frame_ver, text="Este es tu inventario")
     titulo.config(bg="lime green",
@@ -344,23 +352,28 @@ def verFrame():
 
     boton_volver = Button(frame_ver, text="Volver", command=volver)
     boton_volver.config(bg="green", fg="white")
-    boton_volver.grid(row=1, column=0, sticky=NW)
+    boton_volver.grid(row=3, column=1, sticky=NW)
+
+    boton_info = Button(frame_ver, text="Mostrar info", command=mostrarInfoVer).grid(row=3, column=2)
 
     frame_mostrar.config(bd=4, relief="solid")
     frame_mostrar.grid(row=2)
 
-    # boton_volver = Button(frame_mostrar, text="Volver", command=volver)
-    # boton_volver.config(bg="green", fg="white")
-    # boton_volver.grid(row=1, column=0, sticky=NW)
 
-
+    
     for producto in ver:
         Label(frame_mostrar,text=f"Id producto:  {producto[0]}").grid()
-        Label(frame_mostrar,text=f"Id usuario creador: {producto[1]}").grid()
-        Label(frame_mostrar,text=f"Id tipo de producto:  {producto[2]}").grid()
+        #Label(frame_mostrar,text=f"Id usuario creador: {producto[1]}").grid()
+        if producto[2] == 1:
+            Label(frame_mostrar,text=f"Tipo: {tipos[0]}").grid()
+        elif producto[2] == 2:
+            Label(frame_mostrar,text=f"Tipo: {tipos[1]}").grid()
+        else:
+            Label(frame_mostrar, text=f"Tipo: {tipos[2]}").grid()
         Label(frame_mostrar,text=f"Cantidad: {producto[3]}").grid()
-        Label(frame_mostrar,text=f"Fecha creación: {producto[4]}").grid()
+        #Label(frame_mostrar,text=f"Fecha creación: {producto[4]}").grid()
         Label(frame_mostrar,text=f"--------").grid()
+    
     
         
 
@@ -504,7 +517,7 @@ def eliminarTodoFrame():
     entry_id = Entry(frame_eliminar_todo, textvariable=valor_id_eliminar).grid(row=7, column=0, sticky=NW)
 
     Label(frame_eliminar_todo, text="").grid(row=8)
-    #Label(frame_eliminar_todo, text="Eliminar elemento: ").grid(row=9, column=0, sticky=NW)
+    
     boton_si = Button(frame_eliminar_todo, text="Eliminar elemento", command=accionEliminarTodo)
     boton_si.config(bg="green", fg="white")
     boton_si.grid(row=9, column=0, sticky=NW)
@@ -532,6 +545,9 @@ def accionEliminarTodo():
 
     
 
+def mostrarInfoVer():
+    MessageBox.showinfo("¡¡Atencioón!!", "Esta acción usa los arrays para mostrar el tipo de producto")
+
 def mostrarInfoSacar():
     MessageBox.showinfo("¡¡Atencioón!!", "Esta acción saca el producto más viejo en el inventario para usarlo en la cocina (FIFO)")
 
@@ -542,16 +558,8 @@ def mostrarInfoEliminarTodo():
     MessageBox.showinfo("¡¡Atención!!", "Esta acción elimina cualquier producto agregado al inventario(Listas)")
 
 
-def llamada():
-    producto = Product.Producto("", "", "")
-    llamar = producto.traerTipos()
 
 
-    print(llamar)
-    # for elemento in llamar:
-    #     print(elemento[0])
-
-    #Label(frame_anadir, text="").grid(row=3)
 # DEFINICION DE FRAMES
 
 # FRAME MAIN

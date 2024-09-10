@@ -7,7 +7,7 @@ def conectar():
         host = "localhost",
         user = "root",
         passwd = "",
-        database = "inventario",
+        database = "inventario_2",
         port = 3306
     )
 

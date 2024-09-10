@@ -7,7 +7,7 @@ cursor = conectar[1]
 
 class Producto:
 
-    tipos = ["1kg papas", "1lt aceite", "1 paquete salchichas"] 
+     
 
     def __init__(self, id_usuario, id_tipo, cantidad):
         self.id_usuario = id_usuario
@@ -21,13 +21,14 @@ class Producto:
         sql = "INSERT INTO productos VALUES (null, %s, %s, %s, %s)"
         producto = (self.id_usuario, self.id_tipo, self.cantidad, fecha)
 
-        try: 
+        try:
             cursor.execute(sql, producto)
             dataBase.commit()
 
             resultado = [cursor.rowcount, self]
         except:
-             resultado = [0, self]
+
+            resultado = [0, self]
 
         return resultado
     

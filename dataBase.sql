@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS inventario ;
-use inventario;
+CREATE DATABASE IF NOT EXISTS inventario_2 ;
+use inventario_2;
 
 CREATE TABLE usuarios(
     id int(255) auto_increment not null,
@@ -13,15 +13,6 @@ CREATE TABLE usuarios(
 
  ) ENGINE = InnoDb;
 
-CREATE TABLE proveedores (
-    id int(255) auto_increment not null,
-    nombre varchar(255) not null,
-    tipoProducto varchar(255) not null,
-    fechaCreacion DATE not null,
-    CONSTRAINT pk_proveedores PRIMARY KEY(id)
-    
-
- ) ENGINE = InnoDb;
 
  CREATE TABLE tipoProductos (
     id int(255) auto_increment not null,
@@ -33,7 +24,6 @@ CREATE TABLE proveedores (
  CREATE TABLE productos(
     id int(255) auto_increment not null,
     id_usuario int(255),
-    id_proveedor int(255),
     id_tipo int(255),
     cantidad int(255) not null,
     fechaIngreso DATE not null,
@@ -41,16 +31,11 @@ CREATE TABLE proveedores (
     
     CONSTRAINT pk_productos PRIMARY KEY(id),
     CONSTRAINT fk_productos_usuario FOREIGN KEY(id_usuario) REFERENCES usuarios(id),
-    CONSTRAINT fk_productos_proveedor FOREIGN KEY(id_proveedor) REFERENCES proveedores(id),
     CONSTRAINT fk_productos_tipo FOREIGN KEY(id_tipo) REFERENCES tipoProductos(id) 
 
  ) ENGINE = InnoDb;
 
- 
- CREATE TABLE claveMaestra (
-    id int(255) auto_increment not null,
-    clave int(255) not null,
+   INSERT INTO tipoProductos VALUES (null, "1kg papas");
+   INSERT INTO tipoProductos VALUES (null, "1lt aceite");
+   INSERT INTO tipoProductos VALUES (null, "1 paquete salchichas x 12");
 
-    CONSTRAINT pk_claveMaestra PRIMARY KEY(id)
-
- ) ENGINE = InnoDb;
